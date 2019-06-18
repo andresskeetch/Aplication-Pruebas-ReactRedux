@@ -1,5 +1,6 @@
 import React,  { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import Page from './page';
 import findSuggestions from '../../redux/actions/findSuggestions';
 import findResults from '../../redux/actions/findResults';
@@ -24,6 +25,8 @@ class IAppBar extends Component {
     onChangeSelection(text) {
         this.setState({ text });
         this.props.findResults(text);
+        this.props.history.push('/results');
+
     }
     render () {
         const { text} = this.state;
@@ -55,4 +58,4 @@ const mapDispatchToProps = {
     findResults
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(IAppBar);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(IAppBar));
